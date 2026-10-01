@@ -1,11 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
 const Navbar = () => {
   const pathname = usePathname();
+
+  const [theme, setTheme] = useState<"light" | "dark">(() => {
+    if (typeof window === "undefined") return "dark";
+
+    const savedTheme = localStorage.getItem("theme");
+    return savedTheme === "light" || savedTheme === "dark" ? savedTheme : "dark";
+  });
 
   const links = [
     { name: "Home", href: "/" },
@@ -14,6 +21,20 @@ const Navbar = () => {
   ];
 
   const isActive = (href: string) => pathname === href;
+
+  // Load saved theme
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
+
+  // Toggle theme
+  const toggleTheme = () => {
+    const newTheme = theme === "dark" ? "light" : "dark";
+
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+    document.documentElement.setAttribute("data-theme", newTheme);
+  };
 
   return (
     <header className="sticky top-0 z-50 border-b border-base-300 bg-base-100/80 backdrop-blur-xl">
@@ -48,52 +69,110 @@ const Navbar = () => {
           </nav>
         </div>
 
-        {/* Hire Me */}
-        <div className="navbar-end">
+        {/* Right Side */}
+        <div className="navbar-end gap-2">
+          {/* Theme Toggle */}
+          <button
+            onClick={toggleTheme}
+            className="btn btn-ghost btn-circle transition-all duration-300 hover:rotate-12"
+            aria-label="Toggle theme"
+          >
+            {theme === "dark" ? (
+              // Sun
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364-.707.707M6.343 17.657l-.707.707m12.728 0-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z"
+                />
+              </svg>
+            ) : (
+              // Moon
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"
+                />
+              </svg>
+            )}
+          </button>
+
+          {/* Hire Me */}
           <Link
             href="/contact"
-            className="btn btn-primary rounded-full px-6 shadow-md transition-all duration-300 hover:scale-105"
+            className="btn btn-primary hidden rounded-full px-6 shadow-md transition-all duration-300 hover:scale-105 sm:flex"
           >
             Hire Me
           </Link>
-        </div>
 
-        {/* Mobile Menu */}
-        <div className="dropdown dropdown-end lg:hidden">
-          <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+          {/* Mobile Menu */}
+          <div className="dropdown dropdown-end lg:hidden">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost btn-circle"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
-          </div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </div>
 
-          <ul
-            tabIndex={0}
-            className="menu dropdown-content z-1 mt-3 w-52 rounded-2xl border border-base-300 bg-base-100 p-3 shadow-xl"
-          >
-            {links.map((link) => (
-              <li key={link.href}>
+            <ul
+              tabIndex={0}
+              className="menu dropdown-content z-1 mt-3 w-52 rounded-2xl border border-base-300 bg-base-100 p-3 shadow-xl"
+            >
+              {links.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className={`rounded-xl ${
+                      isActive(link.href)
+                        ? "bg-primary text-primary-content"
+                        : ""
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+
+              {/* Mobile Hire Me */}
+              <li className="mt-2 border-t border-base-300 pt-2">
                 <Link
-                  href={link.href}
-                  className={`rounded-xl ${
-                    isActive(link.href) ? "bg-primary text-primary-content" : ""
-                  }`}
+                  href="/contact"
+                  className="rounded-xl bg-primary text-primary-content"
                 >
-                  {link.name}
+                  Hire Me
                 </Link>
               </li>
-            ))}
-          </ul>
+            </ul>
+          </div>
         </div>
       </div>
     </header>
