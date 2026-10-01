@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const About = () => {
@@ -11,11 +12,13 @@ const About = () => {
             <div className="absolute -left-10 -top-10 h-40 w-40 rounded-full bg-primary/10 blur-3xl" />
 
             {/* Image */}
-            <div className="relative overflow-hidden rounded-[2rem] border border-base-300 bg-base-200 shadow-xl">
-              <img
-                src="/mehedi.png"
+            <div className="relative overflow-hidden rounded-4xl border border-base-300 bg-base-200 shadow-xl">
+              <Image
+                src="/Mehedi-Profile.png"
                 alt="Mehedi Hasan"
-                className="aspect-[4/5] w-full object-cover transition-transform duration-700 hover:scale-105"
+                className="aspect-4/5 w-full object-cover transition-transform duration-700 hover:scale-105"
+                width={500}
+                height={500}
               />
             </div>
 
@@ -47,10 +50,10 @@ const About = () => {
 
             {/* Description */}
             <p className="mt-6 text-base leading-7 text-base-content/70 sm:text-lg">
-              I&apos;m a WordPress Developer specializing in Elementor, WooCommerce,
-              website design, redesign and custom development. I help businesses
-              build, fix, migrate, optimize and secure fast, responsive
-              WordPress websites.
+              I&apos;m a WordPress Developer specializing in Elementor,
+              WooCommerce, website design, redesign and custom development. I
+              help businesses build, fix, migrate, optimize and secure fast,
+              responsive WordPress websites.
             </p>
 
             <p className="mt-4 text-base leading-7 text-base-content/60">

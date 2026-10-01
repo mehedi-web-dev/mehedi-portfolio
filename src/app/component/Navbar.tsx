@@ -11,7 +11,9 @@ const Navbar = () => {
     if (typeof window === "undefined") return "dark";
 
     const savedTheme = localStorage.getItem("theme");
-    return savedTheme === "light" || savedTheme === "dark" ? savedTheme : "dark";
+    return savedTheme === "light" || savedTheme === "dark"
+      ? savedTheme
+      : "dark";
   });
 
   const links = [

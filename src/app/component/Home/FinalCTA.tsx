@@ -5,7 +5,7 @@ export default function FinalCTA() {
     <section className="relative overflow-hidden py-24 sm:py-32">
       {/* Animated Background */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/10 blur-3xl animate-[ctaGlow_7s_ease-in-out_infinite]" />
+        <div className="absolute left-1/2 top-1/2 h-125 w-125 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/10 blur-3xl animate-[ctaGlow_7s_ease-in-out_infinite]" />
 
         <div className="absolute -left-20 top-20 h-40 w-40 rounded-full border border-primary/10 animate-[ctaFloatLeft_8s_ease-in-out_infinite]" />
 
@@ -13,7 +13,7 @@ export default function FinalCTA() {
       </div>
 
       <div className="relative mx-auto max-w-5xl px-6 lg:px-8">
-        <div className="relative overflow-hidden rounded-[2rem] border border-primary/20 bg-base-200/60 px-6 py-16 text-center shadow-2xl shadow-primary/5 backdrop-blur-xl sm:px-12 sm:py-20">
+        <div className="relative overflow-hidden rounded-4xl border border-primary/20 bg-base-200/60 px-6 py-16 text-center shadow-2xl shadow-primary/5 backdrop-blur-xl sm:px-12 sm:py-20">
           {/* Decorative circles */}
           <div className="pointer-events-none absolute -left-20 -top-20 h-40 w-40 rounded-full border border-primary/10" />
 

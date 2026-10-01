@@ -91,11 +91,13 @@ const Hero = () => {
           {/* Profile Image */}
           <div className="relative z-10 w-full max-w-95 animate-float">
             <div className="relative aspect-square overflow-hidden rounded-4xl border border-base-300 bg-base-200 shadow-2xl">
-              {/* <Image
-                src="/mehedi.png"
+              <Image
+                src="/Mehedi-Profile.png"
                 alt="Mehedi Hasan"
                 className="h-full w-full object-cover"
-              /> */}
+                width={500}
+                height={500}
+              />
 
               {/* Glass Info */}
               <div className="absolute bottom-4 left-4 right-4 rounded-2xl border border-white/10 bg-base-100/70 p-4 backdrop-blur-xl">
