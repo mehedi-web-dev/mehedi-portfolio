@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 
 const services = [
@@ -161,10 +162,10 @@ const Services = () => {
             {/* Decorative Ring */}
             <div className="absolute h-[470px] w-[470px] rounded-full border border-dashed border-primary/10" />
 
-            <div className="absolute h-[390px] w-[390px] rounded-full border border-dashed border-secondary/10" />
+            <div className="absolute h-[390px] w-97.5 rounded-full border border-dashed border-secondary/10" />
 
             {/* Card Stack */}
-            <div className="relative h-[460px] w-full max-w-[500px]">
+            <div className="relative h-115 w-full max-w-125">
               {services.map((service, index) => {
                 const offset = index - activeIndex;
                 const distance = Math.abs(offset);
@@ -199,9 +200,9 @@ const Services = () => {
                   >
                     {/* Card */}
                     <div
-                      className={`relative overflow-hidden rounded-[1.5rem] border p-6 backdrop-blur-xl transition-all duration-700 ${
+                      className={`relative overflow-hidden rounded-3xl border p-6 backdrop-blur-xl transition-all duration-700 ${
                         isActive
-                          ? "border-primary/50 bg-gradient-to-br from-primary/20 via-base-200 to-secondary/10 shadow-2xl shadow-primary/10"
+                          ? "border-primary/50 bg-linear-to-br from-primary/20 via-base-200 to-secondary/10 shadow-2xl shadow-primary/10"
                           : "border-base-300/70 bg-base-200/80 shadow-xl"
                       }`}
                     >
@@ -209,7 +210,7 @@ const Services = () => {
                       <div
                         className={`absolute left-0 right-0 top-0 h-px transition-all duration-500 ${
                           isActive
-                            ? "bg-gradient-to-r from-transparent via-primary to-transparent"
+                            ? "bg-linear-to-r from-transparent via-primary to-transparent"
                             : "bg-transparent"
                         }`}
                       />
@@ -217,9 +218,7 @@ const Services = () => {
                       {/* Background Number */}
                       <span
                         className={`absolute -right-3 -top-8 text-[110px] font-black leading-none transition-colors duration-500 ${
-                          isActive
-                            ? "text-primary/[0.08]"
-                            : "text-base-content/[0.025]"
+                          isActive ? "text-primary/8" : "text-base-content/2.5"
                         }`}
                       >
                         {service.number}
@@ -279,15 +278,18 @@ const Services = () => {
                             Explore service
                           </span>
 
-                          <span
-                            className={`flex h-9 w-9 items-center justify-center rounded-full transition-all duration-300 ${
-                              isActive
-                                ? "bg-primary text-primary-content"
-                                : "bg-base-100 text-primary"
-                            }`}
+                          <Link href="/service">
+                            <span
+                              className={`flex h-9 w-9 items-center justify-center rounded-full transition-all duration-300 ${
+                                isActive
+                                  ? "bg-primary text-primary-content"
+                                  : "bg-base-100 text-primary"
+                              }`}
                           >
                             ↗
                           </span>
+                            
+                          </Link>
                         </div>
                       </div>
                     </div>

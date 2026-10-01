@@ -3,6 +3,13 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./component/Navbar";
 import Footer from "./component/Footer";
+import BackgroundAnimation from "./component/BackgroundAnimation";
+import { JetBrains_Mono } from "next/font/google";
+
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
+  subsets: ["latin"],
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,8 +32,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body
+        className={`${jetbrainsMono.variable} font-mono min-h-full flex flex-col`}
+      >
         <Navbar />
+        <BackgroundAnimation />
         {children}
         <Footer />
       </body>
