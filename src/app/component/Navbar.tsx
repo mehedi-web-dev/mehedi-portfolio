@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
 const Navbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
 
   const [theme, setTheme] = useState<"light" | "dark">(() => {
@@ -125,57 +126,82 @@ const Navbar = () => {
           </Link>
 
           {/* Mobile Menu */}
-          <div className="dropdown dropdown-end lg:hidden">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            </div>
 
-            <ul
-              tabIndex={0}
-              className="menu dropdown-content z-1 mt-3 w-52 rounded-2xl border border-base-300 bg-base-100 p-3 shadow-xl"
+          {/* Mobile Menu */}
+          <div className="relative lg:hidden">
+            {/* Hamburger / Close Button */}
+            <button
+              type="button"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="btn btn-ghost btn-circle"
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isMenuOpen}
             >
-              {links.map((link) => (
-                <li key={link.href}>
+              {isMenuOpen ? (
+                // Close Icon
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18 18 6M6 6l12 12"
+                  />
+                </svg>
+              ) : (
+                // Hamburger Icon
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                </svg>
+              )}
+            </button>
+
+            {/* Dropdown Menu */}
+            {isMenuOpen && (
+              <ul className="menu absolute right-0 top-full z-50 mt-3 w-52 rounded-2xl border border-base-300 bg-base-100 p-3 shadow-xl">
+                {links.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      onClick={() => setIsMenuOpen(false)}
+                      className={`rounded-xl ${
+                        isActive(link.href)
+                          ? "bg-primary text-primary-content"
+                          : ""
+                      }`}
+                    >
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+
+                <li className="mt-2 border-t border-base-300 pt-2">
                   <Link
-                    href={link.href}
-                    className={`rounded-xl ${
-                      isActive(link.href)
-                        ? "bg-primary text-primary-content"
-                        : ""
-                    }`}
+                    href="/contact"
+                    onClick={() => setIsMenuOpen(false)}
+                    className="rounded-xl bg-primary text-primary-content"
                   >
-                    {link.name}
+                    Hire Me
                   </Link>
                 </li>
-              ))}
-
-              {/* Mobile Hire Me */}
-              <li className="mt-2 border-t border-base-300 pt-2">
-                <Link
-                  href="/contact"
-                  className="rounded-xl bg-primary text-primary-content"
-                >
-                  Hire Me
-                </Link>
-              </li>
-            </ul>
+              </ul>
+            )}
           </div>
         </div>
       </div>
